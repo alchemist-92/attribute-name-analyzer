@@ -1,0 +1,9 @@
+daves-dev-tools
+black
+flake8
+mypy
+pytest
+cython
+wheel
+pip
+setuptools

@@ -1,0 +1,20 @@
+manifest: "1.0"
+title: attribute-name-analyzer
+description:
+type: documentation
+tags:
+  - Cerberus
+urls:
+  repository: https://github.com/alchemist-92/attribute-name-analyzer
+  issues: https://noboard.com
+maintainerEmail: reddy.siddartha53@gmail.com
+documents: &documents
+  documents:
+    - title: README
+      type: markdown
+      url: https://raw.githubusercontent.com/alchemist-92/attribute-name-analyzer/master/README.md
+defaultVersion: "latest"
+versions:
+  "latest":
+    status: release
+    <<: *documents
