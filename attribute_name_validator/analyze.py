@@ -145,11 +145,11 @@ class AttributeNameValidator:
                 class_word not in self.catalog.class_words
                 and class_word not in self.catalog.class_word_abbreviations
             ):
-                self.catalog.class_word_abbreviations[
-                    class_word
-                ] = model.ClassWordAbbreviation(
-                    abbreviation=class_word,
-                    class_word=class_word,
+                self.catalog.class_word_abbreviations[class_word] = (
+                    model.ClassWordAbbreviation(
+                        abbreviation=class_word,
+                        class_word=class_word,
+                    )
                 )
                 self.catalog.class_words[class_word] = dict()
         # updating acronym dictionary with list of extra acronyms

@@ -67,10 +67,12 @@ requirements:
 	daves-dev-tools requirements update -nv flake8 && \
 	echo "Requirements updated successfully!"
 
-
 test:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	tox run-parallel -r -o
+	if [[ "$$(python -V)" = "Python 3.8."* ]] ;\
+	then tox -r -p ;\
+	else tox -r -e pytest ;\
+	fi
 
 format:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \

@@ -374,58 +374,60 @@ class UsedAbbreviations(sob.model.Dictionary):
         super().__init__(items)
 
 
-sob.meta.dictionary_writable(  # type: ignore
-    Acronyms
-).value_types = sob.types.MutableTypes([Phrases])
-sob.meta.object_writable(  # type: ignore
-    Aggregate
-).properties = sob.meta.Properties(
-    [
-        ("phrase", sob.properties.String()),
-        ("sample_usage", sob.properties.String()),
-        ("when_to_use", sob.properties.String()),
-    ]
+sob.meta.dictionary_writable(Acronyms).value_types = (  # type: ignore
+    sob.types.MutableTypes([Phrases])
 )
-sob.meta.dictionary_writable(  # type: ignore
-    Aggregates
-).value_types = sob.types.MutableTypes([Aggregate])
-sob.meta.object_writable(  # type: ignore
-    CatalogDocument
-).properties = sob.meta.Properties(
-    [
-        (
-            "class_word_abbreviations",
-            sob.properties.Property(
-                types=sob.types.MutableTypes([ClassWordAbbreviations])
-            ),
-        ),
-        (
-            "class_words",
-            sob.properties.Property(
-                types=sob.types.MutableTypes([ClassWords])
-            ),
-        ),
-        (
-            "acronyms",
-            sob.properties.Property(types=sob.types.MutableTypes([Acronyms])),
-        ),
-        (
-            "aggregates",
-            sob.properties.Property(
-                types=sob.types.MutableTypes([Aggregates])
-            ),
-        ),
-    ]
+sob.meta.object_writable(Aggregate).properties = (  # type: ignore
+    sob.meta.Properties(
+        [
+            ("phrase", sob.properties.String()),
+            ("sample_usage", sob.properties.String()),
+            ("when_to_use", sob.properties.String()),
+        ]
+    )
 )
-sob.meta.object_writable(  # type: ignore
-    ClassWordAbbreviation
-).properties = sob.meta.Properties(
-    [
-        ("abbreviation", sob.properties.String()),
-        ("class_word", sob.properties.String()),
-        ("sample_usage", sob.properties.String()),
-        ("when_to_use", sob.properties.String()),
-    ]
+sob.meta.dictionary_writable(Aggregates).value_types = (  # type: ignore
+    sob.types.MutableTypes([Aggregate])
+)
+sob.meta.object_writable(CatalogDocument).properties = (  # type: ignore
+    sob.meta.Properties(
+        [
+            (
+                "class_word_abbreviations",
+                sob.properties.Property(
+                    types=sob.types.MutableTypes([ClassWordAbbreviations])
+                ),
+            ),
+            (
+                "class_words",
+                sob.properties.Property(
+                    types=sob.types.MutableTypes([ClassWords])
+                ),
+            ),
+            (
+                "acronyms",
+                sob.properties.Property(
+                    types=sob.types.MutableTypes([Acronyms])
+                ),
+            ),
+            (
+                "aggregates",
+                sob.properties.Property(
+                    types=sob.types.MutableTypes([Aggregates])
+                ),
+            ),
+        ]
+    )
+)
+sob.meta.object_writable(ClassWordAbbreviation).properties = (  # type: ignore
+    sob.meta.Properties(
+        [
+            ("abbreviation", sob.properties.String()),
+            ("class_word", sob.properties.String()),
+            ("sample_usage", sob.properties.String()),
+            ("when_to_use", sob.properties.String()),
+        ]
+    )
 )
 sob.meta.dictionary_writable(  # type: ignore
     ClassWordAbbreviations
@@ -433,9 +435,9 @@ sob.meta.dictionary_writable(  # type: ignore
 sob.meta.dictionary_writable(  # type: ignore
     ClassWordAnalysisReport
 ).value_types = sob.types.MutableTypes([ColumnNameClassWordAnalysis])
-sob.meta.dictionary_writable(  # type: ignore
-    ClassWords
-).value_types = sob.types.MutableTypes([sob.model.Dictionary])
+sob.meta.dictionary_writable(ClassWords).value_types = (  # type: ignore
+    sob.types.MutableTypes([sob.model.Dictionary])
+)
 sob.meta.array_writable(  # type: ignore
     ColumnNameClassWordAnalysis
 ).item_types = sob.types.MutableTypes([ColumnNameClassWordAnalysisUnit])
@@ -474,26 +476,28 @@ sob.meta.object_writable(  # type: ignore
         ("when_to_use", sob.properties.String()),
     ]
 )
-sob.meta.array_writable(  # type: ignore
-    Phrases
-).item_types = sob.types.MutableTypes([sob.properties.String()])
-sob.meta.object_writable(  # type: ignore
-    UsedAbbreviation
-).properties = sob.meta.Properties(
-    [
-        (
-            "column_names",
-            sob.properties.Property(
-                types=sob.types.MutableTypes([UsedAbbreviationColumnNames])
+sob.meta.array_writable(Phrases).item_types = (  # type: ignore
+    sob.types.MutableTypes([sob.properties.String()])
+)
+sob.meta.object_writable(UsedAbbreviation).properties = (  # type: ignore
+    sob.meta.Properties(
+        [
+            (
+                "column_names",
+                sob.properties.Property(
+                    types=sob.types.MutableTypes([UsedAbbreviationColumnNames])
+                ),
             ),
-        ),
-        (
-            "allowed_usages",
-            sob.properties.Property(
-                types=sob.types.MutableTypes([UsedAbbreviationAllowedUsages])
+            (
+                "allowed_usages",
+                sob.properties.Property(
+                    types=sob.types.MutableTypes(
+                        [UsedAbbreviationAllowedUsages]
+                    )
+                ),
             ),
-        ),
-    ]
+        ]
+    )
 )
 sob.meta.array_writable(  # type: ignore
     UsedAbbreviationAllowedUsages
@@ -501,9 +505,9 @@ sob.meta.array_writable(  # type: ignore
 sob.meta.array_writable(  # type: ignore
     UsedAbbreviationColumnNames
 ).item_types = sob.types.MutableTypes([sob.properties.String()])
-sob.meta.dictionary_writable(  # type: ignore
-    UsedAbbreviations
-).value_types = sob.types.MutableTypes([UsedAbbreviation])
+sob.meta.dictionary_writable(UsedAbbreviations).value_types = (  # type: ignore
+    sob.types.MutableTypes([UsedAbbreviation])
+)
 # The following is used to retain class names when re-generating
 # this model from an updated OpenAPI document
 _POINTERS_CLASSES: typing.Dict[str, typing.Type[sob.abc.Model]] = {

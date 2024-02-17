@@ -2,6 +2,7 @@
 This script parses '../CATALOG.xlsx' and outputs a catalog
 document to '../attribute_name_validator/catalog.json'.
 """
+
 import shutil
 import sob
 import os
@@ -27,8 +28,10 @@ TESTS_CATALOG_PATH: str = str(
         "catalog.json",
     )
 )
-ATTRIBUTE_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE_MD_PATH: Path = PROJECT_PATH.joinpath(  # noqa
-    "documentation/ATTRIBUTE_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE.md"
+ATTRIBUTE_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE_MD_PATH: Path = (
+    PROJECT_PATH.joinpath(  # noqa
+        "documentation/ATTRIBUTE_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE.md"
+    )
 )
 
 
@@ -153,13 +156,13 @@ class Mapper:
         for row in self.catalog_tables.class_word:
             if row.abbreviation:
                 assert row.class_word
-                class_words[
-                    row.abbreviation.upper()
-                ] = model.ClassWordAbbreviation(
-                    abbreviation=row.abbreviation.upper(),
-                    class_word=row.class_word.upper(),
-                    sample_usage=row.sample_usage,
-                    when_to_use=row.when_to_use,
+                class_words[row.abbreviation.upper()] = (
+                    model.ClassWordAbbreviation(
+                        abbreviation=row.abbreviation.upper(),
+                        class_word=row.class_word.upper(),
+                        sample_usage=row.sample_usage,
+                        when_to_use=row.when_to_use,
+                    )
                 )
         return class_words
 
