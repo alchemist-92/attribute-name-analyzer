@@ -6,9 +6,7 @@ from pathlib import Path
 _PROJECT_PATH: Path = Path(__file__).absolute().parent.parent
 OPENAPI_JSON: str = str(_PROJECT_PATH.joinpath("openapi.json"))
 MODEL_PY: str = str(
-    _PROJECT_PATH.joinpath(
-        "attribute_name_validator", "model.py"
-    )
+    _PROJECT_PATH.joinpath("attribute_name_validator", "model.py")
 )
 
 

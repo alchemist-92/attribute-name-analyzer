@@ -1,25 +1,26 @@
 SHELL := bash
+PYTHON_VERSION := 3.8
 
 dev-install:
-	{ python3.8 -m venv venv || py -3.8 -m venv venv ; } && \
+	{ python$(PYTHON_VERSION) -m venv venv || py -$(PYTHON_VERSION) -m venv venv ; } && \
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
 	pip3 install --upgrade pip && \
 	pip3 install -r dev_requirements.txt && \
-	pip3 install -r requirements.txt -e . --config-settings editable_mode=compat && \
-	{ mypy --install-types --non-interactive || echo "" ; } && \
-	echo "Success!"
-
-ci-install:
-	{ rm -R venv || echo "" ; } && \
-	{ python3.8 -m venv venv || py -3.8 -m venv venv ; } && \
-	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	pip3 install --upgrade pip && \
+	pip3 install -r test_requirements.txt && \
+	pip3 install -r ci_requirements.txt && \
 	pip3 install -r requirements.txt -e . && \
 	echo "Success!"
 
+
+ci-install:
+	{ python3 -m venv venv || py -3 -m venv venv ; } && \
+	{ venv/Scripts/activate.bat || . venv/bin/activate ; } && \
+	pip3 install --upgrade pip wheel && \
+	pip3 install -r requirements.txt && \
+	echo "Installation complete"
+
 install:
-	{ rm -R venv || echo "" ; } && \
-	{ python3.8 -m venv venv || py -3.8 -m venv venv ; } && \
+	{ python$(PYTHON_VERSION) -m venv venv || py -$(PYTHON_VERSION) -m venv venv ; } && \
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
 	pip3 install --upgrade pip && \
 	pip3 install -c requirements.txt -e . && \
@@ -30,7 +31,7 @@ install:
 # conflicting dependencies.
 reinstall:
 	{ rm -R venv || echo "" ; } && \
-	{ python3.8 -m venv venv || py -3.8 -m venv venv ; } && \
+	{ python$(PYTHON_VERSION) -m venv venv || py -$(PYTHON_VERSION) -m venv venv ; } && \
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
 	pip3 install --upgrade pip wheel && \
 	pip3 install -r dev_requirements.txt && \
@@ -61,24 +62,21 @@ clean:
 	daves-dev-tools clean && \
 	echo "Cleanup completed successfully!"
 
-editable:
-	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	daves-dev-tools install-editable --upgrade-strategy eager && \
-	echo "Editable installations completed successfully!" && \
-	make upgrade
-
 requirements:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	daves-dev-tools requirements update && \
+	daves-dev-tools requirements update -nv flake8 && \
 	echo "Requirements updated successfully!"
+
 
 test:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	tox -r -p
+	tox run-parallel -r -o
 
-distribute:
+format:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	daves-dev-tools pypi distribute
+	black . && isort . && flake8
+
+
 
 remodel:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
