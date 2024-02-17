@@ -70,7 +70,6 @@ requirements:
 
 test:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	make format
 	if [[ "$$(python -V)" = "Python 3.8."* ]] ;\
 	then tox -r -p ;\
 	else tox -r -e pytest ;\
@@ -78,7 +77,7 @@ test:
 
 format:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	mypy && black . && isort . && flake8
+	mypy && black . && flake8
 
 remodel:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
