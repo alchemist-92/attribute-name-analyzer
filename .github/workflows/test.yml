@@ -1,11 +1,10 @@
 name: test
 on:
-  workflow_dispatch:
-  workflow_call:
   pull_request:
     paths:
-    - Makefile
     - attribute_name_validator/**
+    - Makefile
+    - pyproject.toml
     - setup.py
     - setup.cfg
     - tests/**
@@ -14,20 +13,25 @@ on:
     - .github/**
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os:
+        - ubuntu-latest
+        - windows-latest
+        - macos-latest
         python:
-          - 3.8
-          - 3.9
-          - "3.10"
-          - 3.11
+        - 3.8
+        - 3.9
+        - '3.10'
+        - 3.11
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
+    - uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python }}
-        cache: 'pip'
-        cache-dependency-path: 'requirements.txt'
-    - run: make ci-install
-    - run: make test
+    - name: install
+      run: make ci-install
+    - name: test
+      run: make test
