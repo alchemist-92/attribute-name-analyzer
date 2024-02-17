@@ -1,0 +1,183 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Attribute Name Analyzer",
+        "description": "This document describes schemas for the input to, output from the attribute-name-validator(anv) package. No `paths` are defined in this document because this application is not a REST API, it is a python library and command line interface (CLI)."
+    },
+    "components": {
+        "schemas": {
+            "catalog_document": {
+                "description": "The root document for the catalog ",
+                "properties": {
+                    "class_word_abbreviations": {
+                        "$ref": "#/components/schemas/class_word_abbreviations"
+                    },
+                    "class_words": {
+                        "$ref": "#/components/schemas/class_words"
+                    },
+                    "acronyms": {
+                        "$ref": "#/components/schemas/acronyms"
+                    },
+                    "aggregates": {
+                        "$ref": "#/components/schemas/aggregates"
+                    }
+                },
+                "type": "object"
+            },
+            "class_words": {
+                "description": "A collection of  class words.",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/class_word"
+                },
+                "type": "object"
+            },
+            "class_word": {
+                "description": "Information about a class word.",
+                "properties": {},
+                "type": "object"
+            },
+            "class_word_abbreviations": {
+                "description": "A dictionary mapping abbreviated class words to class words and usage information about each.",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/class_word_abbreviation"
+                },
+                "type": "object"
+            },
+            "class_word_abbreviation": {
+                "description": "Information about a class word.",
+                "properties": {
+                    "abbreviation": {
+                        "type": "string"
+                    },
+                    "class_word": {
+                        "type": "string"
+                    },
+                    "sample_usage": {
+                        "type": "string"
+                    },
+                    "when_to_use": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "acronyms": {
+                "description": "A mapping of ACRONYMS to a list of phrases which they are approved to be used for.",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/phrases"
+                },
+                "type": "object"
+            },
+            "phrases": {
+                "description": "One or more phrases acronym to be used for",
+                "items": {
+                    "type": "string"
+                },
+                "type": "array"
+            },
+            "aggregates": {
+                "description": "A mapping of aggregate acronyms to its usage",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/aggregate"
+                },
+                "type": "object"
+            },
+            "aggregate": {
+                "description": "One or more phrases acronym to be used for",
+                "properties": {
+                    "phrase": {
+                        "type": "string"
+                    },
+                    "sample_usage": {
+                        "type": "string"
+                    },
+                    "when_to_use": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "class_word_analysis_report": {
+                "description": "A mapping of ACRONYMS to a list of phrases which they are approved to be used for.",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/column_name_class_word_analysis"
+                },
+                "type": "object"
+            },
+            "column_name_class_word_analysis": {
+                "description": "Class word analysis of an column name.",
+                "items": {
+                    "$ref": "#/components/schemas/column_name_class_word_analysis_unit"
+                },
+                "type": "array"
+            },
+            "used_abbreviations": {
+                "description": "This object records data pertaining to all instances of the usage of all approved abbreviations, and the abbreviation's approved usages. This is for ensuring they are used only for approved usages.",
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/used_abbreviation"
+                },
+                "type": "object"
+            },
+            "used_abbreviation": {
+                "description": "This object records data pertaining to all instances of the usage of an approved abbreviation, and the abbreviation's approved usages ",
+                "properties": {
+                    "column_names": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "allowed_usages": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "column_name_class_word_analysis_unit": {
+                "description": "Class Word Analysis Instance",
+                "properties": {
+                    "column_name": {
+                        "type": "string"
+                    },
+                    "word": {
+                        "type": "string"
+                    },
+                    "analysis": {
+                        "enum": [
+                            "ABBREVIATED CLASS WORD IS USED IN THE MIDDLE",
+                            "FULL CLASS WORD IS USED IN THE MIDDLE",
+                            "FULL CLASS WORD IS USED AT THE END",
+                            "APPROVED ACRONYM IS USED AT THE END",
+                            "GENERIC WORD USED AT THE END",
+                            "ABBREVIATED CLASS WORD IS USED AT THE END",
+                            "CLASS WORD IS USED AS COLUMN NAME",
+                            "UNIT SPECIFIC CLASS WORD MAY BE NEEDED AT THE END",
+                            "AGGREGATE ACRONYM IS USED AT THE END",
+                            "AGGREGATE ACRONYM IS USED IN THE MIDDLE",
+                            "NO CLASS WORD IS USED IN THE NAME"
+                        ],
+                        "type": "string"
+                    },
+                    "class_word_rules_followed": {
+                        "enum": [
+                            "YES",
+                            "NO",
+                            "MAY BE"
+                        ],
+                        "type": "string"
+                    },
+                    "additional_notes": {
+                        "type": "string"
+                    },
+                    "when_to_use": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

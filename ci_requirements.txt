@@ -1,2 +1,1 @@
-daves-dev-tools~=2.0
-tox
+daves-dev-tools~=2.21

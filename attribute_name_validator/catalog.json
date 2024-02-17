@@ -1,0 +1,472 @@
+{
+    "class_word_abbreviations": {
+        "AMT": {
+            "abbreviation": "AMT",
+            "class_word": "AMOUNT",
+            "sample_usage": "Travel_Expense_Amt, Travel_Expense_Amt_USD",
+            "when_to_use": "Use this for monetary amounts ONLY when the Cost and Price Class Words are not appropriate. The designation for general non-price non-cost monetary amounts. Will need a corresponding currency code attribute. All amounts should have an additional column converted to the monetary standard of USD (see USD)."
+        },
+        "AREA": {
+            "abbreviation": "AREA",
+            "class_word": "AREA",
+            "sample_usage": "Field_Area",
+            "when_to_use": "Use this for measurements of area. Will need a corresponding area unit of measure. Note if area in your name has a general meaning rather than a measurement of area then don't use it as a Class Word - e.g. Greater metropolitan area would need an appropriate Class Word added."
+        },
+        "CM": {
+            "abbreviation": "CM",
+            "class_word": "CENTIMETERS",
+            "sample_usage": "Product_Len_Cm",
+            "when_to_use": "Use meters to standardize all product measurements of dimension - i.e.. length width height For non-product dimensions use Meters for standardization for distance see Kilometers."
+        },
+        "CD": {
+            "abbreviation": "CD",
+            "class_word": "CODE",
+            "sample_usage": "Country_Cd, Incoterm_Cd",
+            "when_to_use": "An abstracted designation that represents information in an abbreviated manner that is associated or accompanied by a description. Usually symbols letters or numbers that translate consistently to represent info. GUIDANCE: If you have control make codes as human readable as possible."
+        },
+        "COST": {
+            "abbreviation": "COST",
+            "class_word": "COST",
+            "sample_usage": "Material_Cost, Material_Cost_USD",
+            "when_to_use": "The amount for something purchased as opposed to something we offer for sale where price is the appropriate Class Word. Note do not use Cost AND Amount - just Cost. All cost fields should have an additional attribute converted to the monetary standard of USD (see USD)."
+        },
+        "CNT": {
+            "abbreviation": "CNT",
+            "class_word": "COUNT",
+            "sample_usage": "Actual_Piece_Cnt",
+            "when_to_use": "A count is number reached by counting up or down in units or groups e.g. we increment/decrement an integer counter by one. If the value is a result of a calculation instead of counting use quantity instead."
+        },
+        "M3": {
+            "abbreviation": "M3",
+            "class_word": "CUBICMETERS",
+            "sample_usage": "Shipment_Vol_M3",
+            "when_to_use": "Use cubic meters to standardize all measurements of Volume. M3 is appended to the Class Word Volumne (_Vol_M3)."
+        },
+        "DT": {
+            "abbreviation": "DT",
+            "class_word": "DATE",
+            "sample_usage": "Cost_Recognition_Dt, Received_Dt",
+            "when_to_use": "A date in time in terms of day month or year in any combination. This could be Julian date calendar date accounting date etc. The exact format of the date is not an issue when assigning this class word. This is to be used when ONLY the data portion is known/important and NOT the time of day component - for that see Time"
+        },
+        "DESC": {
+            "abbreviation": "DESC",
+            "class_word": "DESCRIPTION",
+            "sample_usage": "Incoterm_Desc",
+            "when_to_use": "Free-form text which describes the precise meaning or significance of a thing (entity). Usually serves to create a mental image of something. More general than a name and more condensed than a text item."
+        },
+        "DEG": {
+            "abbreviation": "DEG",
+            "class_word": "DEGREE",
+            "sample_usage": "Latitutde_Coordinate_Deg",
+            "when_to_use": "High_Temperature_Celsius_DegTo be used for latitude and longitude measurements as well as temperatures. Note: for latitude: 5 decimal places accurate to within 1.1 meters. 6 accurate to about 4 inches."
+        },
+        "DIST": {
+            "abbreviation": "DIST",
+            "class_word": "DISTANCE",
+            "sample_usage": "Route_Dist To_Destination_Dist Lane_Dist",
+            "when_to_use": "For measures that typically involve a journey trip or (transportation) movement. Common UOM values are Kilometers and/or Miles."
+        },
+        "HGHT": {
+            "abbreviation": "HGHT",
+            "class_word": "HEIGHT",
+            "sample_usage": "Container_Hght Package_Hght",
+            "when_to_use": "For dimension measurements of height. See also Width and Length. See Meters for standardized"
+        },
+        "ID": {
+            "abbreviation": "ID",
+            "class_word": "IDENTIFIER",
+            "sample_usage": "Product_Id",
+            "when_to_use": "A unique label without meaning attached to a thing (entity) which will serve to distinguish that thing from all others to which it is related. Usually computer or application generated. Primary key identifiers are usually named by using entity name as the qualifier - e.g. Employee_ID. Other identifiers should have appropriate qualifiers - e.g. User_ID. SEE ALSO Universal Unique Identifier (UUID)."
+        },
+        "IND": {
+            "abbreviation": "IND",
+            "class_word": "INDICATOR",
+            "sample_usage": "Active_Ind, Credit_Ind",
+            "when_to_use": "This is for fields intended primarily for attributes that are binary (e.g. yes/no on/off true/false). The ONLY valid values for INDICATORs are 'Y' (Yes/On/True) or 'N' (No/Off/False) or 'U' (Unknown - to be used in place of NULLs). This is NOT to be used for dimensional attributes which should not have short-hand values (see Class Word Denotation) but have the pair of values spelled out PLUS the values to handle error-cases (e.g. NOT VALID). NOTE: INDICATOR is the appropriate class word to use for this situation not FLAG. If you have multiple other values use the CODE class word."
+        },
+        "KG": {
+            "abbreviation": "KG",
+            "class_word": "KILOGRAMS",
+            "sample_usage": "Shipment_Gross_Wt_Kg",
+            "when_to_use": "Use kilograms to specify and standardize all measures of weight."
+        },
+        "KM": {
+            "abbreviation": "KM",
+            "class_word": "KILOMETERS",
+            "sample_usage": "Route_Distance_Km",
+            "when_to_use": "Use kilometers to specify and standardize all measures of distance vs dimension (see Meters)."
+        },
+        "LEN": {
+            "abbreviation": "LEN",
+            "class_word": "LENGTH",
+            "sample_usage": "Package_Len, Container_Len",
+            "when_to_use": "For dimension measurements of length. See also Width and Length. See Meters for standardized."
+        },
+        "M": {
+            "abbreviation": "M",
+            "class_word": "METERS",
+            "sample_usage": "Container_Hght_M, Package_Len_M",
+            "when_to_use": "Use meters to standardize all linear measurements of dimension - e.g. length width height etc. (except distance see Kilometers)."
+        },
+        "NM": {
+            "abbreviation": "NM",
+            "class_word": "NAME",
+            "sample_usage": "Country_Nm Origin_Port_Nm",
+            "when_to_use": "A character string which represents the name or title of a person place or thing. The name of something will usually separate it from other related things."
+        },
+        "NBR": {
+            "abbreviation": "NBR",
+            "class_word": "NUMBER",
+            "sample_usage": "Year_NBR, Account_Nbr, Day_of_Month_NBR, Day_of_Year_NBR, Day_of_Week_NBR",
+            "when_to_use": "Not used for calculation purposes. This is a designation of a numerical identifier for a thing (entity) but typically one that people might reference in normal business use (e.g. Employee number or Invoice Number). This is not a quantity or amount!"
+        },
+        "PCT": {
+            "abbreviation": "PCT",
+            "class_word": "PERCENT",
+            "sample_usage": "Tax_Pct Applied_Tax_Pct",
+            "when_to_use": "A number which represents the number of parts out of one hundred. Percentage: which represents a ratio where 100 is the denominator. 50% is shown as 50 not 0.50"
+        },
+        "PRC": {
+            "abbreviation": "PRC",
+            "class_word": "PRICE",
+            "sample_usage": "Wholesale_Prc, Retail_Prc, Retail_Prc_USD",
+            "when_to_use": "This is for the sale amount of offerings. If its something we're buying the appropriate Class Word is likely Cost. There are multiple types of prices (e.g. MSRP). Do not use Price AND Amount just Price. All price fields should have an additional column converted to the monetary standard of USD (see USD)."
+        },
+        "QTY": {
+            "abbreviation": "QTY",
+            "class_word": "QUANTITY",
+            "sample_usage": "Order_Qty",
+            "when_to_use": "A designation of numeric values representing the number of occurrences of something. Is used both as the result of a calculation and in support of calculations. The property of anything which can be determined by measurement except money (see Amount) and is typically a real number as opposed to an integer (see Count). May require an attribute specifying the unit of measure."
+        },
+        "SCR": {
+            "abbreviation": "SCR",
+            "class_word": "SCORE",
+            "sample_usage": "Overall_Quality_Scr",
+            "when_to_use": "A numeric assessment of a characteristic against a predefined scale resulting in a calculated score. Scores are differentiate from quantities in that scores usual have a contextual range/scale (e.g. 0 to 100)."
+        },
+        "M2": {
+            "abbreviation": "M2",
+            "class_word": "SQUARE",
+            "sample_usage": "MetersField_Area_M2",
+            "when_to_use": "Use M2 to standardize all measurements of area."
+        },
+        "TXT": {
+            "abbreviation": "TXT",
+            "class_word": "TEXT",
+            "sample_usage": "Comment_Txt",
+            "when_to_use": "Free-form long narrative type comment. Generally longer than a description and free-form as opposed to providing definition/meaning for a related attribute (see Description). This is a last resort for true text that can't be classified by other class words (Name Description specifically & really all the rest as well). Can also be used in transactional multi-use field situations."
+        },
+        "TM": {
+            "abbreviation": "TM",
+            "class_word": "TIME",
+            "sample_usage": "Delivery_Tm, Material_Lead_Tm_Days",
+            "when_to_use": "The time of day from a clock reading. Not a quantity of time or interval. Often the time portion of a timestamp related to a corresponding date field containing only the date portion. Note: allows for efficient data mart design as most dates do not require timestamps and also allows the capture of the date portion independently of time. That said for business events the ideal is to use Timestamp_UTC. Dates can be extracted from that. It is very important that the local timezone be included (e.g. Local Timezone Code) whenever this is used for any times that are business facing. The timezone is required to do the conversion to Tmst_UTC."
+        },
+        "TMST": {
+            "abbreviation": "TMST",
+            "class_word": "TIMESTAMP",
+            "sample_usage": "Created_Tmst Updated_Tmst",
+            "when_to_use": "A reading of a calendar combined with a reading of a clock. A point in time including day month and year hours minutes and seconds. The exact format of the date portion is not an issue when assigning this class word. It is very important that the local timezone be included (e.g. Local Timezone Code) whenever this is used for any timestamps that are business facing. The timezone is required to do the conversion to Tmst_UTC."
+        },
+        "UOM": {
+            "abbreviation": "UOM",
+            "class_word": "UNITOFMEASURE",
+            "sample_usage": "Allocated_Vol_UOM Actual_Gross_Wt_UOM",
+            "when_to_use": "This Class Word should accompany any measures (e.g. weights volumes) that have not been standardized. This Class Word should simply be appended to the name of the corresponding measure *** (e.g. My_Weight would have the companion field My_Weight_UOM). Sometimes this can hold an indication of product grouping (Ea/Pair/Pack). \\n *** When converting to the physical name along with UOM the measure name should be abbreviated: \\n My Weight => My_Wt \\n My Weight UOM => My_Wt_UOM"
+        },
+        "USD": {
+            "abbreviation": "USD",
+            "class_word": "UNITEDSTATESDOLLAR",
+            "sample_usage": "Travel_Expense_Amt_USD, Material_Cost_USD, Retail_Prc_USD",
+            "when_to_use": "Add USD after Class Words Cost Price and Amount to standardize all monetary amounts for ease of analytics and computations. Note: may also use other regional common conversions as requirements dictate - e.g. Cost_EUR (for conversion to Euros)."
+        },
+        "UTC": {
+            "abbreviation": "UTC",
+            "class_word": "COORDINATEDUNIVERSALTIME",
+            "sample_usage": "Shipment_Received_Tmst_UTC",
+            "when_to_use": "For business events the to support analytics the standard is is to convert to Coordinated Universal Time (UTC which corresponds to the GMT timezone) - i.e. append UTC to the Timestamp Class Word: Tmst_UTC."
+        },
+        "UUID": {
+            "abbreviation": "UUID",
+            "class_word": "UNIVERSALUNIQUEIDENTIFIER",
+            "sample_usage": "Product_UUID",
+            "when_to_use": "This has been a standard for Transactional and Dimensional Data Products. This will be used to provide a universally unique identifier"
+        },
+        "VOL": {
+            "abbreviation": "VOL",
+            "class_word": "VOLUME",
+            "sample_usage": "Allocated_Vol Maximum_Vol",
+            "when_to_use": "The volume of a thing. Will require an additional attribute specifying UOM if used. Should also have a field that specifies standard volume units in cubic meters for ease of analytics - see Cubic Meters (M3)"
+        },
+        "WT": {
+            "abbreviation": "WT",
+            "class_word": "WEIGHT",
+            "sample_usage": "Actual_Gross_Wt",
+            "when_to_use": "The weight of a thing. Will require an attribute specifying UOM if used. Should also have afield that specifes standard weight in KG for ease of analtics - see Kilograms (KG)."
+        },
+        "WDTH": {
+            "abbreviation": "WDTH",
+            "class_word": "WIDTH",
+            "sample_usage": "Package_Wdth",
+            "when_to_use": "For dimension measurements of width. See also Width and Length. See Meters for standardized."
+        },
+        "MS": {
+            "abbreviation": "MS",
+            "class_word": "MILLISECONDS",
+            "sample_usage": "Network_Latency_Ms",
+            "when_to_use": "Use this for time interval /duration measurements that average less than 1 second."
+        },
+        "SECS": {
+            "abbreviation": "SECS",
+            "class_word": "SECONDS",
+            "sample_usage": "Processing_Secs",
+            "when_to_use": "Use this for time interval /duration measurements that average in seconds (> 1 sec & < 1 min)."
+        },
+        "MINS": {
+            "abbreviation": "MINS",
+            "class_word": "MINUTES",
+            "sample_usage": "Customer_Service_Call_Length_Mins",
+            "when_to_use": "Use this for time interval /duration measurements that average in minutes (> 1 min & < 1 hr)."
+        },
+        "HRS": {
+            "abbreviation": "HRS",
+            "class_word": "HOURS",
+            "sample_usage": "Daily_Billed_Hrs",
+            "when_to_use": "Use this for time interval /duration measurements that average in hours (> 1 hr & < 1 day)."
+        },
+        "DAYS": {
+            "abbreviation": "DAYS",
+            "class_word": "DAYS",
+            "sample_usage": "Material_Lead_Tm_Days Plant_Build_Early_Planned_Nbr_of_Days",
+            "when_to_use": "Use this for time interval /duration measurements that the business wants expressed in days."
+        },
+        "WKS": {
+            "abbreviation": "WKS",
+            "class_word": "WEEKS",
+            "sample_usage": "Factory_Build_Late_Planned_Nbr_of_Wks",
+            "when_to_use": "Use this for time interval /duration measurements that the business wants expressed in weeks."
+        },
+        "MOS": {
+            "abbreviation": "MOS",
+            "class_word": "MONTHS",
+            "sample_usage": "Committed_Forecast_Mos",
+            "when_to_use": "Use this for time interval /duration measurements that the business wants expressed in months."
+        },
+        "YRS": {
+            "abbreviation": "YRS",
+            "class_word": "YEARS",
+            "sample_usage": "Employee_Service_Length_Yrs",
+            "when_to_use": "Use this for time interval /duration measurements that the business wants expressed in years."
+        }
+    },
+    "class_words": {
+        "AMOUNT": {},
+        "AREA": {},
+        "CENTIMETERS": {},
+        "CODE": {},
+        "COST": {},
+        "COUNT": {},
+        "CUBICMETERS": {},
+        "DATE": {},
+        "DESCRIPTION": {},
+        "DEGREE": {},
+        "DISTANCE": {},
+        "HEIGHT": {},
+        "IDENTIFIER": {},
+        "INDICATOR": {},
+        "KILOGRAMS": {},
+        "KILOMETERS": {},
+        "LENGTH": {},
+        "METERS": {},
+        "NAME": {},
+        "NUMBER": {},
+        "PERCENT": {},
+        "PRICE": {},
+        "QUANTITY": {},
+        "SCORE": {},
+        "SQUARE": {},
+        "TEXT": {},
+        "TIME": {},
+        "TIMESTAMP": {},
+        "UNITOFMEASURE": {},
+        "UNITEDSTATESDOLLAR": {},
+        "COORDINATEDUNIVERSALTIME": {},
+        "UNIVERSALUNIQUEIDENTIFIER": {},
+        "VOLUME": {},
+        "WEIGHT": {},
+        "WIDTH": {},
+        "MILLISECONDS": {},
+        "SECONDS": {},
+        "MINUTES": {},
+        "HOURS": {},
+        "DAYS": {},
+        "WEEKS": {},
+        "MONTHS": {},
+        "YEARS": {}
+    },
+    "acronyms": {
+        "AUC": [
+            "Average Unit Cost"
+        ],
+        "AUR": [
+            "Average Unit Retail"
+        ],
+        "BOM": [
+            "Bill Of Materials"
+        ],
+        "CAD": [
+            "Computer Aided Design"
+        ],
+        "CY": [
+            "Current Year"
+        ],
+        "DC": [
+            "Distribution Center"
+        ],
+        "EBIT": [
+            "Earnings Before Interest and Taxes"
+        ],
+        "EIN": [
+            "Employer Identification Number"
+        ],
+        "EOD": [
+            "End of Day"
+        ],
+        "EOM": [
+            "End Of Month"
+        ],
+        "EOP": [
+            "End of Period"
+        ],
+        "ERP": [
+            "Enterprise Resource Planning"
+        ],
+        "ETA": [
+            "Estimated Time Of Arrival"
+        ],
+        "FC": [
+            "Fiscal Calendar"
+        ],
+        "FY": [
+            "Fiscal Year"
+        ],
+        "GTIN": [
+            "Global Trade Item Number"
+        ],
+        "MSRP": [
+            "Manufacturer Suggested Retail Price"
+        ],
+        "MSI": [
+            "Material Sustainability Index"
+        ],
+        "OCD": [
+            "Order Cancel Date"
+        ],
+        "OR": [
+            "Origin Receipt"
+        ],
+        "POS": [
+            "Point of Sale"
+        ],
+        "PY": [
+            "Prior Year"
+        ],
+        "PLM": [
+            "Product Line Manager"
+        ],
+        "PO": [
+            "Product Offering",
+            "Purchase Order"
+        ],
+        "POD": [
+            "Proof Of Delivery"
+        ],
+        "RFID": [
+            "Radio Frequency Identifier"
+        ],
+        "RGB": [
+            "Red Green Blue"
+        ],
+        "RTV": [
+            "Return to Vendor"
+        ],
+        "SO": [
+            "Sales Order"
+        ],
+        "SWIFT": [
+            "Society For Worldwide Interbank Financial Telecommunications"
+        ],
+        "SKU": [
+            "Stock Keeping Unit"
+        ],
+        "TIN": [
+            "Taxpayer Identification Number"
+        ],
+        "URL": [
+            "Uniform Resource Locator"
+        ],
+        "UOM": [
+            "Unit Of Measure"
+        ],
+        "USD": [
+            "United States Dollars"
+        ],
+        "UPC": [
+            "Universal Product Code"
+        ],
+        "UUID": [
+            "Universally Unique Identifier"
+        ],
+        "VAS": [
+            "Value Added Services"
+        ],
+        "VAT": [
+            "Value Added Tax"
+        ],
+        "YOY": [
+            "Year Over Year"
+        ]
+    },
+    "aggregates": {
+        "4WK": {
+            "phrase": "4 Week Aggregate",
+            "sample_usage": "NET_SALES_QTY_4WK",
+            "when_to_use": "Use this for Aggregates"
+        },
+        "13WK": {
+            "phrase": "13 Week Aggregate",
+            "sample_usage": "NET_SALES_QTY_13WK",
+            "when_to_use": "Use this for Aggregates"
+        },
+        "26WK": {
+            "phrase": "26 Week Aggregate",
+            "sample_usage": "NET_SALES_QTY_26WK",
+            "when_to_use": "Use this for Aggregates"
+        },
+        "52WK": {
+            "phrase": "52 Week Aggregate",
+            "sample_usage": "NET_SALES_QTY_52WK",
+            "when_to_use": "Use this for Aggregates"
+        },
+        "WTD": {
+            "phrase": "Week To Date Aggregate",
+            "sample_usage": "INV_QTY_WTD",
+            "when_to_use": "Use this for Aggregates"
+        },
+        "MTD": {
+            "phrase": "Month To Date Aggregate",
+            "sample_usage": "INV_QTY_MTD",
+            "when_to_use": "Use this for Aggregates"
+        },
+        "QTD": {
+            "phrase": "Quarter To Date Aggregate",
+            "sample_usage": "INV_QTY_QTD",
+            "when_to_use": "Use this for Aggregates"
+        },
+        "YTD": {
+            "phrase": "Year To Date Aggregate",
+            "sample_usage": "INV_QTY_YTD",
+            "when_to_use": "Use this for Aggregates"
+        }
+    }
+}

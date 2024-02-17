@@ -1,0 +1,41 @@
+name: distribute
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - pyproject.toml
+    - setup.py
+    - setup.cfg
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+    - run: make ci-install
+    - run: make test
+    - name: configure git
+      run: |
+        git config --global user.email "$(git --no-pager show -s --format=%ae)" && \
+        git config --global user.name "$(git --no-pager show -s --format=%an)"
+    - name: tag version
+      run: venv/bin/daves-dev-tools git tag-version
+    - name: push tags
+      run: git push --tags || echo "Tag already exists"
+    - name: install gh
+      run: |
+        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+        && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+        && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+        && sudo apt update \
+        && sudo apt install gh -y
+    - name: create release
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: gh release create "$(venv/bin/python setup.py --version)" || echo "Release already exists"
+    - name: Distribute to Artifactory
+      run: |
+#        venv/bin/daves-dev-tools pypi distribute --skip-existing

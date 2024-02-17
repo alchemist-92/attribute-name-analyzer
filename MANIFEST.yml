@@ -1,18 +1,17 @@
 manifest: "1.0"
-title: attribute-name-analyzer
+title: attribute-name-validator
 description:
 type: documentation
 tags:
   - Cerberus
 urls:
-  repository: https://github.com/alchemist-92/attribute-name-analyzer
-  issues: https://noboard.com
+  repository: https://github.com/siddartham/attribute-name-validator
 maintainerEmail: reddy.siddartha53@gmail.com
 documents: &documents
   documents:
     - title: README
       type: markdown
-      url: https://raw.githubusercontent.com/alchemist-92/attribute-name-analyzer/master/README.md
+      url: https://raw.githubusercontent.com/siddartham/attribute-name-validator/master/README.md
 defaultVersion: "latest"
 versions:
   "latest":

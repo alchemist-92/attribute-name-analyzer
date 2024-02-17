@@ -1,3 +1,5 @@
+SHELL := bash
+
 dev-install:
 	{ python3.8 -m venv venv || py -3.8 -m venv venv ; } && \
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
@@ -77,3 +79,24 @@ test:
 distribute:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
 	daves-dev-tools pypi distribute
+
+remodel:
+	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
+	python3 scripts/remodel.py
+	black .
+
+update-catalog:
+	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
+	python3 scripts/update_catalog.py
+
+clear-parsed-data:
+	rm attribute_name_validator/*.json
+	rm attribute_name_validator/*.html
+	rm attribute_name_validator/*.xlsx
+	rm -rf reports
+
+.PHONY: reports
+reports:
+	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
+	make clear-parsed-data -i
+	pytest

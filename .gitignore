@@ -16,3 +16,5 @@ pip-wheel-metadata
 !.flake8
 !.dockerignore
 !.editorconfig
+tests/reports
+!.github

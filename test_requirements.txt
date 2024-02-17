@@ -1,6 +1,7 @@
 black
 flake8
+marko
+mypy
 pip
 pytest
-mypy
 tox

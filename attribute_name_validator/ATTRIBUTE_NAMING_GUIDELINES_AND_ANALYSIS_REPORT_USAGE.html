@@ -1,0 +1,310 @@
+<h3>ATTRIBUTE NAMING GUIDELINES</h3>
+<h4>What are the issues faced during the process of deciding column names of objects in physical data layer?</h4>
+<p><strong>In our usual process</strong> of naming columns, intentionally, or unintentionally <strong>we use a mix of both
+sources manually to come up with names for columns</strong>.
+This makes the process of deciding on column names extremely fluid and inconsistent.</p>
+<p><strong>Following are, few of the consequences.</strong></p>
+<ol>
+<li>
+We often use abbreviated words in column names on the basis that,<ol>
+<li>they were already also used in upstream objects, or</li>
+<li>It's a legacy column, and we use it, as is - thus violating naming rules</li>
+<li>they were used in similar columns of other existing objects.</li>
+</ol>
+</li>
+<li>We do not use class words sometimes for columns and this gets overlooked in the process.</li>
+<li>
+We sometimes use class words in the middle of objects. It often gets overlooked, if they conform to
+enterprise naming rules or not.<ol>
+<li>If is the sole class word used in the column name, it defeats the purpose of class word
+(classification and easier understanding data qualities of column by looking at the last word).</li>
+</ol>
+</li>
+<li>
+Sometimes we use approved abbreviations for class words, sometimes we just use the full class word.<ol>
+<li><strong><code>WDTH</code> or <code>WIDTH</code>, <code>WT</code> or <code>WEIGHT</code>, <code>PRC</code> or <code>PRICE</code>, <code>PCT</code> or <code>PERCENT</code>, <code>YRS</code> or <code>YEARS</code></strong> etc.</li>
+</ol>
+</li>
+<li>We sometimes make up new acronyms or abbreviations or compose words together adhoc, as suited for a situation and
+propagate them further in downstream objects.</li>
+</ol>
+<p>Since there is no tool/platform to use, to get feedback on column names during the process of naming,
+all the above actions further propagate inconsistencies in column naming across Data Landscape.</p>
+<h3>GIST OF PHYSICAL DATA NAMING STANDARDS</h3>
+<p><strong>Apply to Data at Rest:</strong></p>
+<ol>
+<li>The Data Lake (ex: S3)</li>
+<li>The Data Warehouse (ex: Snowflake)</li>
+</ol>
+<p><strong>Column Names in Physical Layer:</strong></p>
+<p><strong>All physical names will simply be the full logical name (see exceptions in catalog for limited abbreviations)</strong> with a
+specified physical platform separation scheme to replace the spaces as follows</p>
+<ol>
+<li><strong>SNOWFLAKE</strong> - <strong>REPLACE_SPACES_WITH_UNDERSCORES_AND_USE_UPPERCASE</strong> (set as Snowflake uses case to determine uniqueness)</li>
+<li><strong>HIVE</strong> METASTORE (for our Data Lake) - <strong>replace spaces with underscores</strong>.</li>
+</ol>
+<p><strong>Abbreviation usage Exceptions to Full Names:</strong></p>
+<ol>
+<li>Where <strong>APPROVED ACRONYMS</strong> exist for a logical name, those acronyms may be used in the physical name</li>
+<li><strong>ALL CLASS WORDS</strong> - which always <strong>come at the END of a column name</strong>.</li>
+</ol>
+<p>** Class Word <strong>Abbreviations apply to NDF Curated, Integrated, and Aggregated layers</strong>. These do not apply
+to integration based canonical models as they specify the full word.</p>
+<p><strong>Primary Keys:</strong></p>
+<ol>
+<li>This will often just be the Table Name as the qualifier (e.g. Employee) followed by ID (e.g. Employee_ID)</li>
+</ol>
+<p><strong>Foreign Keys:</strong></p>
+<ol>
+<li>Where a primary key from one table is used as a foreign key in another table, it should keep the same original name.</li>
+<li>
+Where a primary key from one table is used in more than one way, appropriate role-playing names should be applied<ol>
+<li>e.g. In an Employee table, where the primary key is &quot;Employee_ID&quot;, a foreign key to the employee's manager would
+need to be role-named - e.g. &quot;Manager_ID&quot;</li>
+<li>e.g. in a Project table, with references to multiple employees, each foreign key reference would need an
+appropriate role name - e.g. Scrum_Master_ID, Solution_Architect_ID, etc.</li>
+</ol>
+</li>
+</ol>
+<p><strong>Understanding and consistency in names are much more important than shortness going forward</strong></p>
+<ol>
+<li>Yes, it takes longer to type the names, BUT the architectural principles of Simplicity and
+Ease of Use far outweigh this.</li>
+<li>Easily understood as ideally data names will be written once, but consumed multiple times.</li>
+</ol>
+<p><strong>Physical Column Ordering</strong></p>
+<ol>
+<li>WHY? - The reason for this ordering is, <strong>to FACILITATE ease of consumption</strong>. Ordering does not affect the
+performance in Snowflake.</li>
+<li>
+Columns should be ordered as follows within views or tables in physical databases<ol>
+<li>Primary Key (PK) Columns</li>
+<li>Everything else in alphabetic order (except Audit/HouseKeeping columns)</li>
+<li>Standard Audit/Housekeeping columns (e.g. Create Date, Last Update Date, etc.)</li>
+</ol>
+</li>
+</ol>
+<p><strong>Potential Exception Needs to be Considered for Data-In-Motion Structures for Data Payloads</strong></p>
+<ol>
+<li>Noting for future discussion, consider standard abbreviations for data-in-motion payloads. (These don't apply to data
+at rest - see above).</li>
+<li>Need to collaborate with API standards group &amp; Streaming Platforms</li>
+<li>Reason is that <strong>full names in the data descriptions for API/dynamic payloads</strong> (e.g. JSON or XML structures) can
+<strong>lead to increased network load</strong> (size of payloads) and performance impacts</li>
+</ol>
+<h4>What are Class Words?</h4>
+<ol>
+<li><strong>Column name is composed of two basic parts</strong>:a Naming Qualifier and a Class Word.</li>
+<li><strong>Column names should end in one of the class words</strong> to assist in uniformity and understanding across our name
+spaces, representing the high-level category (type or class) to which the data in column belongs.</li>
+<li><strong>Class words describe the</strong> &quot;type&quot; or <strong>&quot;class&quot; of data elements</strong> (such as amounts, counts, indicators, etc.), for example,
+<strong><code>Employee_First_Name</code></strong> where <strong><code>Name</code></strong> is the class word.</li>
+<li>
+Class words are required EVEN if an acronym used as a qualifier includes a class word in the acronym<ol>
+<li>For example, <strong><code>MSRP</code></strong> would need to be <strong><code>MSRP_Price</code></strong> .</li>
+</ol>
+</li>
+<li>
+For time intervals, having an additional prefixing class word is optional, and may be added as desired to add clarity
+e.g. Count, Length, Number, Quantity or Time may be optionally added as qualifiers.<ol>
+<li>Ex: <strong><code>Material_Lead_Tm_Days, Plant_Build_Early_Planned_Nbr_of_Days</code></strong> etc.</li>
+</ol>
+</li>
+<li>
+There can be other <strong>composite class words</strong> too, such as below<ol>
+<li><strong><code>Travel_Expense_Amt_USD, Material_Cost_USD, Retail_Prc_USD</code></strong> etc.</li>
+</ol>
+</li>
+</ol>
+<h4>List of approved Class Words and Acronyms</h4>
+<ul>
+<li>List of Class Words for this package are in CATALOG.xlsx</li>
+<li>List of Approved Acronyms for this package are in CATALOG.xlsx</li>
+</ul>
+<h3>INSTALLATION &amp; USAGE OF TOOL</h3>
+<p>This pacakge is used as  CLI to get the feedback on column names of a given entity, when validated against Naming Standards</p>
+<ul>
+<li>create a text file with a list of column names to be used for an object in physical data layer(ex: SNOWFLAKE).</li>
+<li>run the <code>anv &lt;COLUMN_NAMES_TEXT_FILE&gt;</code>  command providing the column names text file.</li>
+<li>see the feedback generated in &quot;reports&quot; folder.</li>
+</ul>
+<p><strong>INSTALLATION</strong></p>
+<pre><code class="language-shell">$ pip3 install git+https://github.com/siddartham/attribute-name-validator.git
+</code></pre>
+<p><strong>REPORT GENERATION</strong></p>
+<pre><code class="language-shell">$ attribute-name-validator COLUMN_NAMES_TEXT_FILE
+</code></pre>
+<p><strong>OUTPUT</strong></p>
+<pre><code class="language-shell">$ ls reports/
+COLUMN_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE.html       CATALOG.xlsx                                            COLUMN_NAMES_TEXT_FILE_REPORT.xlsx
+</code></pre>
+<p><strong>HOW TO USE THE REPORT</strong></p>
+<h4>Work Flow</h4>
+<p><img src="AttributeNameValidator.png" alt="Screenshot" /></p>
+<p>On running the command on a column names text file or a folder with column name files,
+the tool produces <strong>two generic files</strong>, one XLSX file with the class word and acronym catalog
+used for the analysis and this HTML page with brief description of naming rules and package usage.</p>
+<ol>
+<li><strong><code>reports/CATALOG.xlsx</code></strong> - Has the entire Catalog of Enterprise Approved Class Words and Acronyms considered in naming analysis.</li>
+<li><strong><code>reports/COLUMN_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE.html</code></strong> - This HTML page expanding on the usage of package and reports generated.
+It also has references to Enterprise Naming Guidelines.</li>
+</ol>
+<p>The tool <strong>generates a report per object</strong> named <strong><code>reports/ENTITY_NAME_REPORT.xlsx</code></strong>, highlighting potential violations.</p>
+<p>**In an ideal situation, the report generated for a given entity, ** would have the following.</p>
+<ol>
+<li><strong><code>CLASS_WORD_RULES_FOLLOWED?</code></strong> column in <strong><code>CLASS_WORDS_ANALYSIS</code></strong> sheet should be <code>YES</code> or <code>MAY BE</code> for all entries.
+However, <strong>review</strong> the ones with <strong><code>MAY BE</code></strong> or <strong><code>NO</code></strong>.</li>
+<li>There should be <strong>no ABBREVIATIONS or ACRONYMS or COMBINEDWORDS in <code>FULL_WORDS_USED</code></strong> sheet.
+For example, if words such as  <strong><code>SESN</code></strong> or <strong><code>CHNL</code></strong> or <strong><code>GEO</code></strong> or <strong><code>CRBN</code></strong> or <strong><code>PRODCAL</code></strong> or <strong><code>ITEMTYPE</code></strong> or
+<strong><code>PRICEMODIFIER</code></strong> etc., and other similar words appear in the list, which are neither english/other language words,
+nor part of approved abbreviated class words or acronyms, they stand in violation of enterprise guidelines and
+thus have to be changed to their full word forms.</li>
+<li>For all the entries in <strong><code>APPROVED_ABBREVIATIONS_USED</code></strong> sheet, meanings of <strong>short-forms used in naming columns should match one of
+the meanings</strong>. For example, if <strong><code>STD</code> is used</strong> by developers of object <strong>to mean <code>STANDARD</code>, and not
+<code>SEASON TO DATE</code></strong>, an approved Acronym, the <code>USED_CATALOG</code> report, against <code>STD</code> approved usages, would not
+show <code>STANDARD</code>, only shows <code>SEASON TO DATE</code>, thus <strong>have to rename it</strong>, even though <code>STD</code> is an approved
+abbreviation, but for a different purpose.</li>
+</ol>
+<p><strong>FOR FURTHER USAGE OF THE TOOL</strong></p>
+<pre><code class="language-shell">$ anv -h
+usage: attribute-name-validator [-h] [-l] [--write-to-text-files] target_path
+
+This command generates report on naming analysis from either a list of column name files in a folder,
+or a given column names file, by looking up the words used to the column names in a local Abbreviation catalog
+ that comes with the installation of package. On the execution of this command, you will also have a reports
+folder created with CATALOG.xlsx and COLUMN_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE.html files,
+which have more information related to the working of the tool
+
+To add a set of Class Words Abbreviations and Acronyms, as exceptions beyond current enterprise guidelines
+create anv.ini file and add exceptions under respective sections, as shown below
+
+[additional-catalog]
+acronyms = LOB
+class-word-abbreviations = IN, IN3, CM3, LB
+
+positional arguments:
+  target_path           Path to file with column names or folder with column name files to analyze
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -l, --log             This flag, if present, shows logs of execution in sys.stdout.
+  --write-to-text-files, -wttf
+                        This flag, if present, also creates text files of reports under their respective entity specific folder.
+
+</code></pre>
+<h3>FUTURE DEVELOPMENT, EXTENDING SUPPORT FOR NEW ENTRIES IN THE CATALOG, CHANGES TO NAMING RULES</h3>
+<ol start="2">
+<li>Functionality of this tool can be extended for further development of new features, addition/modification to
+the ruleset, addition of new entries to the catalog.</li>
+<li>Would need to run the tool with column names in different kinds of objects used in physical data layer
+across the enterprise, to capture the widely used class words, acronyms that are currently not part of the catalog.</li>
+<li>
+Further, updates to class words sheet is needed.<ol>
+<li>Use the reports generated above to review usage patterns and potential additions to
+class words and acronyms, or even addition of new sheets to the catalog such as list of words maintained as
+<strong><code>EXCEPTIONS TO CLASS WORD RULES</code>, <code>EXCEPTIONS TO ABBREVIATED WORDS</code></strong>.</li>
+<li>going by last words of certain columns such as <strong><code>_CM3</code>, <code>_IN</code>, <code>_IN3</code></strong> , they need to be added to catalog</li>
+<li>additional of classes words for new use cases for sustainability related data sets, like <strong><code>C02E</code></strong> or <strong><code>C02EKG</code></strong> etc</li>
+<li>should <strong><code>_WTD</code>, <code>_MTD</code>, <code>_YTD</code>, <code>_4WK</code>, <code>_12WK</code></strong> etc., be added to class words, or as exceptions to class words?</li>
+</ol>
+</li>
+<li>Further, updates to acronyms sheet is needed, going by the current usage, such as <strong><code>LOB, RTL</code></strong> etc.</li>
+<li>
+Needs Clarity on &quot;mandatory usage of class word abbreviation&quot; rule in physical data layer.<ol>
+<li>Is class word abbreviation(not full class word) mandatory - at the end?</li>
+<li>Is full class word usage allowed - in the middle?</li>
+<li>We are currently using both full forms and abbreviated forms for class words in column naming at different
+places, making the names of columns inconsistent. For example, sometimes we use <strong><code>_PRICE</code></strong>, sometimes <strong><code>_PRC</code></strong>,
+sometimes <strong><code>_WEIGHT</code></strong>, sometimes <strong><code>_WT</code></strong>,  <strong><code>_WIDTH</code></strong>, sometimes <strong><code>_WDTH</code></strong>, but not <strong><code>_WH</code></strong> - makes it more confusing.</li>
+<li>
+A better approach would be to <strong>do away with</strong> all <strong>class word abbreviations</strong>, <strong>except where it is warranted</strong><ol>
+<li>We do not need abbreviations for class words such as, <strong><code>_PRC</code></strong> for <strong><code>_PRICE</code></strong>, <strong><code>_WGHT</code> for <code>_WEIGHT</code></strong>,
+<strong><code>_WDTH</code></strong> for <strong><code>_WIDTH</code></strong>, <strong><code>_AMT</code></strong> for <strong><code>_AMOUNT</code></strong>,
+<strong><code>_TXT</code></strong> for <strong><code>_TEXT</code>, <code>_TM</code></strong> for <strong><code>_TIME</code>, <code>_VOL</code></strong> for <strong><code>_VOLUME</code>, <code>_NM</code></strong> for <strong><code>_NAME</code>, <code>_CNT</code></strong> for <strong><code>_COUNT</code></strong> etc.</li>
+<li>We are not saving many strokes on keyboard, while inviting lot more inconsistency in the naming, with them.</li>
+<li>
+<strong><code>_KG</code></strong> for <strong><code>_KILOGRAMS, _M</code></strong> for <strong><code>_METERS, _M2</code></strong> for <strong><code>_SQUAREMETERS, _M3</code></strong> for <strong><code>_CUBICMETERS, _CM</code></strong> for <strong><code>_CENTIMETERS, _CM3</code></strong> for <strong><code>_CUBICCENTIMETERS, _CO2E</code></strong> for <strong><code>_CO2EQUIVALENT, _UOM, _USD, _UTC, _UUID,</code></strong>  etc. and more Class Words like that
+can be allowed as they,<ol>
+<li>have a universal understanding of what they mean and easier to follow and</li>
+<li>saves keystrokes, while making it easy for the identification of the class, the column value belongs to.</li>
+</ol>
+</li>
+<li><strong>To implement the above,</strong> we just need to update abbreviation column in class words sheet, to have full class word
+where it is not a necessity.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Need to compose the full list of class words which need extra qualifier class word at the end.</li>
+<li>Further, updates to logic in the pacakge need to be made, as needed by Data Governance Platform.</li>
+<li><strong><code>CATALOG.xlsx</code></strong> needs to be updated as needed by the DGP, with requests coming for new custom class words which don't
+fall into any of the suggested category of class words.</li>
+<li>Expand on <strong><code>ACRONYMS</code></strong> sheet Ex: <strong><code>LOB</code></strong> - a well-used acronym, but not part of catalog.</li>
+<li>We may need a list of approved abbreviations(a new sheet), if approved by DGP as exceptions for abbreviation usage
+for some words.</li>
+<li>Class Words sheet needs to be updated to support enterprise wide use cases. For example: Currently <strong><code>_WTD, _MTD</code></strong>,
+while being approved acronyms, also used at the end?. <strong><code>_YEAR, _MONTH</code></strong> are not approved class words, do they have to be</li>
+<li>Further, updates to logic for better feedback. For example: <strong><code>_DAY, _YEAR, _MONTH</code></strong> are not approved class words - suggest
+that they need a class word qualifier like a <strong><code>_MONTH_NBR, _MONTH_TXT, _DAY_NBR</code></strong> ?</li>
+<li>
+Extend <strong><code>FULL_WORD_REPORT</code></strong> sheet in the report to have a new column, <strong><code>SYNONYM</code>/<code>MEANING</code></strong>, whose value is generated for every
+<strong><code>FULL_WORD_REPORT</code></strong> by looking up an English language words catalog of an <strong><code>NLTK</code></strong> library. The value in the column for
+a given word, would give further feed back on, if that is what they mean. - TODO<ol>
+<li>If the column is empty, then there is no english word with that name.</li>
+<li>If there is value in column, ensure that column is used for one of the meanings mentioned, not a short form word
+with the same text.</li>
+<li>This is to ensure, any abbreviated word doesn't slip through, as the acronym or abbreviation spells like an actual word.</li>
+</ol>
+</li>
+</ol>
+<h3>ISSUES WITH COMPLIANCE</h3>
+<p>Above reported inconsistencies is <strong>primarily because of two things</strong></p>
+<ul>
+<li>Lack of <strong>tools</strong>, to iterate through for feedback while naming columns.</li>
+<li>Lack of <strong>processes</strong>, to follow, while deciding on column names.</li>
+</ul>
+<h3>HOW TO IMPLEMENT NAMING GUIDELINES USING THIS TOOL?</h3>
+<p>There are two ways to go about it.</p>
+<h4>END USER INSTALLATION</h4>
+<p>You can install this package from GitHub/PYPI. Anyone can install the package locally and
+run the command providing a column names file, as they build new objects.
+Every system(PC or MAC) comes with python by default, but would need to ensure <strong><code>~python3.8</code></strong> to install this package.
+just have to install the package running above command.</p>
+<h5>DRAWBACKS</h5>
+<p><strong>However</strong>, to have that communication regarding package installation passed down
+to everyone, and expect everyone working on deciding column names, to install this on their system without the
+complications of few of them, having unsupported python version(<strong><code>&lt;py3.8</code></strong>) of python, would be too much of a hassle.</p>
+<p><strong>Even more challenging task, is to expect every one to</strong> generate reports for column names based on then latest
+Data Governance Platform approved catalog data set and rules, <strong>by upgrading the package</strong> as CATALOG.xlsx is a living document,
+and naming rules can change. DGP is expected to update it as and when a need arises.</p>
+<h4>LIGHTWEIGHT CLIENT WITH REMOTE CALLS</h4>
+<p>Alternatively, can use a lightweight client, with Catalog and rules hosted in cloud.</p>
+<h5>DRAWBACKS</h5>
+<ol>
+<li>Would need to deal with authentication from CLI to access the API</li>
+<li>
+Would still need intermittent upgrades to the package<ol>
+<li>less frequent than before, as catalog and naming rules used will always be up-to-date,</li>
+<li>but would need to upgrade the client at some point, if there are breaking
+changes in remote calls to the API.</li>
+</ol>
+</li>
+<li>Technically involved for everyone to use it.</li>
+</ol>
+<h4>HOSTING IT AS A DATA GOVERNANCE TOOL</h4>
+<p>A much easier method to propagate consistent column naming rules across enterprise would be to host it on a
+well communicated data governance platform and add to column naming process, a step to upload the document to the
+site and get a report generated by the tool and iterate the same with changes made as a process to follow while
+building/modifying an object.</p>
+<p>This way, every person working on naming columns, would always get feedback based on latest catalog and rules
+approved by Data Governance Platform.</p>
+<p>From the Data Governance Platform end,</p>
+<p>They need to maintain the latest catalog and naming logic with the package as before.
+and deploy it at a well communicated end point to be consumed by users across the organisation,
+in the process of deciding column names.</p>
+<p>Thus, the latest catalog of abbreviations &amp; rules approved by Data Governance Platform would be consumed by
+everyone in the org for feedback, by just going back to the same hosted tool. Rather than any other individual
+action, everyone has to take, like upgrading to the latest package every time they have a
+task of deciding column names, since one can't be sure that the package they installed sometime back,
+has the latest catalog and naming rules from DGP.</p>
+

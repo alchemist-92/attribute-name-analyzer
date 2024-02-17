@@ -3,5 +3,7 @@ exclude =
     .git,
     venv,
     .tox
+    attribute_name_validator/model.py
 max-complexity = 10
 ignore = F842, W503
+max-line-length = 79
