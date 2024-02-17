@@ -1,7 +1,8 @@
-import sob
-from oapi.oas import model
-from oapi.model import Module  # noqa
 from pathlib import Path
+
+import sob
+from oapi.model import Module  # noqa
+from oapi.oas import model
 
 _PROJECT_PATH: Path = Path(__file__).absolute().parent.parent
 OPENAPI_JSON: str = str(_PROJECT_PATH.joinpath("openapi.json"))

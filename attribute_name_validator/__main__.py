@@ -1,15 +1,14 @@
-from typing import Any, Union, Tuple
-from pathlib import Path
-import shutil
-import logging
 import argparse
+import logging
+import shutil
 from argparse import RawTextHelpFormatter
-from .analyze import get_extra_catalog, AttributeNameValidator
+from pathlib import Path
+from typing import Any, Tuple, Union
+
+from .analyze import AttributeNameValidator, get_extra_catalog
 from .config import (
     ATTRIBUTE_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE_HTML_PATH,
-    CATALOG_XLSX_PATH,
-    CATALOG_JSON_PATH,
-)
+    CATALOG_JSON_PATH, CATALOG_XLSX_PATH)
 from .utilities import iter_csv_files
 
 

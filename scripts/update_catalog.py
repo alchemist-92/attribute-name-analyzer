@@ -3,22 +3,22 @@ This script parses '../CATALOG.xlsx' and outputs a catalog
 document to '../attribute_name_validator/catalog.json'.
 """
 
-import shutil
-import sob
 import os
+import shutil
+from collections import namedtuple
 from dataclasses import dataclass  # type: ignore
 from itertools import islice
-from collections import namedtuple
+from pathlib import Path
+from typing import Any, Dict, Iterable, Tuple, Type
+
+import sob
 from openpyxl import Workbook, load_workbook  # type: ignore
 from openpyxl.cell import Cell  # type: ignore
-from typing import Iterable, Tuple, Type, Dict, Any
-from pathlib import Path
+
 from attribute_name_validator import model
 from attribute_name_validator.config import (
-    CATALOG_JSON_PATH,
-    CATALOG_XLSX_PATH,
     ATTRIBUTE_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE_HTML_PATH,
-)
+    CATALOG_JSON_PATH, CATALOG_XLSX_PATH)
 
 PROJECT_PATH: Path = Path(__file__).absolute().parent.parent
 CATALOG_XLSX: str = str(PROJECT_PATH.joinpath("CATALOG.xlsx"))

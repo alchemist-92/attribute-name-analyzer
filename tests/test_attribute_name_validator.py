@@ -1,15 +1,14 @@
 # import os
+import importlib.util
 import sys
 import unittest
-import importlib.util
+from importlib.machinery import ModuleSpec
 from pathlib import Path
 from types import ModuleType
-from typing import Optional, Any
-from importlib.machinery import ModuleSpec
-from attribute_name_validator.analyze import (
-    AttributeNameValidator,
-    get_extra_catalog,
-)
+from typing import Any, Optional
+
+from attribute_name_validator.analyze import (AttributeNameValidator,
+                                              get_extra_catalog)
 from attribute_name_validator.utilities import iter_csv_files
 
 TEST_DIRECTORY_PATH: Path = Path(__file__).absolute().parent

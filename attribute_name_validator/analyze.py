@@ -1,30 +1,26 @@
-import sob
 import csv
-import shutil
-import logging
 import functools
+import logging
+import shutil
+from collections import namedtuple
+from configparser import ConfigParser
 from math import floor
 from pathlib import Path
-from configparser import ConfigParser
-from collections import namedtuple
-from typing import Set, Generator, Callable, Union, Tuple, Iterable, Dict, List
+from typing import Callable, Dict, Generator, Iterable, List, Set, Tuple, Union
+
+import sob
 from openpyxl import Workbook
-from openpyxl.worksheet.worksheet import Worksheet
+from openpyxl.styles import Font
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.dimensions import ColumnDimension, DimensionHolder
-from openpyxl.styles import Font
+from openpyxl.worksheet.worksheet import Worksheet
+
 from . import model
 from .config import (
-    ATTRIBUTE_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE_HTML_PATH,
     ADDITIONAL_QUALIFIER_NEEDED_CLASS_WORDS,
-    OUTPUT_XLSX_COLUMN_DIMENSIONS,
-    CATALOG_JSON_PATH,
-    CATALOG_XLSX_PATH,
-)
-from .utilities import (
-    sanitize_ini,
-    iter_column_names,
-)
+    ATTRIBUTE_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE_HTML_PATH,
+    CATALOG_JSON_PATH, CATALOG_XLSX_PATH, OUTPUT_XLSX_COLUMN_DIMENSIONS)
+from .utilities import iter_column_names, sanitize_ini
 
 # Defining the data structure for used catalog
 UsedCatalog = Dict[str, Dict[str, List[str]]]

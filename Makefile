@@ -16,6 +16,7 @@ ci-install:
 	{ python3 -m venv venv || py -3 -m venv venv ; } && \
 	{ venv/Scripts/activate.bat || . venv/bin/activate ; } && \
 	pip3 install --upgrade pip wheel && \
+	pip3 install -r test_requirements.txt && \
 	pip3 install -r requirements.txt && \
 	echo "Installation complete"
 
@@ -69,6 +70,7 @@ requirements:
 
 test:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
+	make format
 	if [[ "$$(python -V)" = "Python 3.8."* ]] ;\
 	then tox -r -p ;\
 	else tox -r -e pytest ;\
@@ -76,9 +78,7 @@ test:
 
 format:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	black . && isort . && flake8
-
-
+	mypy && black . && isort . && flake8
 
 remodel:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
