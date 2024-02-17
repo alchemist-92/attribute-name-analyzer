@@ -1,6 +1,6 @@
 # attribute-name-validator
-[![test](https://github.com/siddartham/attribute-name-vlaidator/actions/workflows/test.yml/badge.svg)](https://github.com/siddartham/attribute-name-vlaidator/actions/workflows/test.yml)
-[![distribute](https://github.com/siddartham/attribute-name-vlaidator/actions/workflows/distribute.yml/badge.svg)](https://github.com/siddartham/attribute-name-vlaidator/actions/workflows/distribute.yml)
+[![test](https://github.com/siddartham/attribute-name-validator/actions/workflows/test.yml/badge.svg)](https://github.com/siddartham/attribute-name-validator/actions/workflows/test.yml)
+[![distribute](https://github.com/siddartham/attribute-name-validator/actions/workflows/distribute.yml/badge.svg)](https://github.com/siddartham/attribute-name-validator/actions/workflows/distribute.yml)
 
 This pacakge provides a CLI for column name analysis. It also acts as library for catalog of approved abbreviations and codified column naming rules.
 
