@@ -1,11 +1,11 @@
 name: distribute
 on:
+  workflow_dispatch:
   push:
     branches:
     - master
     paths:
     - pyproject.toml
-    - setup.py
     - setup.cfg
 jobs:
   distribute:
