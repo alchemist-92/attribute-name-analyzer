@@ -325,6 +325,7 @@ class UsedAbbreviation(sob.model.Object):
 
 
 class UsedAbbreviationAllowedUsages(sob.model.Array):
+
     def __init__(
         self,
         items: typing.Union[
@@ -339,6 +340,7 @@ class UsedAbbreviationAllowedUsages(sob.model.Array):
 
 
 class UsedAbbreviationColumnNames(sob.model.Array):
+
     def __init__(
         self,
         items: typing.Union[
