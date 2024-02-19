@@ -44,13 +44,16 @@ reinstall:
 upgrade:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
 	daves-dev-tools requirements freeze\
-	 -nv '*' . pyproject.toml tox.ini ci_requirements.txt\
+	 -nv '*' . pyproject.toml tox.ini ci_requirements.txt dev_requirements.txt test_requirements.txt daves-dev-tools \
 	 > .requirements.txt && \
-	pip3 install --upgrade --upgrade-strategy eager\
-	 -r .requirements.txt -e . && \
+	pip install --upgrade --upgrade-strategy eager\
+	 -r .requirements.txt && \
 	rm .requirements.txt && \
-	make requirements && \
-	echo "Upgrade completed successfully!"
+	make requirements
+
+distribute:
+	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
+	daves-dev-tools distribute --skip-existing
 
 clean:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
@@ -65,8 +68,13 @@ clean:
 
 requirements:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \
-	daves-dev-tools requirements update -nv flake8 && \
-	echo "Requirements updated successfully!"
+	daves-dev-tools requirements update\
+	 -i more-itertools -aen all\
+	 setup.cfg pyproject.toml tox.ini && \
+	daves-dev-tools requirements freeze\
+	 -nv setuptools -nv filelock -nv platformdirs\
+	 . pyproject.toml tox.ini daves-dev-tools\
+	 > requirements.txt
 
 test:
 	{ . venv/bin/activate || venv/Scripts/activate.bat ; } && \

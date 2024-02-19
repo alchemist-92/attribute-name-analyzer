@@ -1,1 +1,1 @@
-daves-dev-tools~=2.21
+daves-dev-tools
