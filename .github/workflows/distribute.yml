@@ -37,8 +37,8 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: gh release create "$(venv/bin/python setup.py --version)" || echo "Release already exists"
-#    - name: Distribute to PyPI
-#      env:
-#        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-#        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-#      run: make distribute
+    - name: Distribute to PyPI
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: make distribute
