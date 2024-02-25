@@ -1,5 +1,6 @@
 name: distribute
 on:
+  workflow_dispatch:
   push:
     branches:
     - main
@@ -7,9 +8,8 @@ on:
     - pyproject.toml
     - setup.py
     - setup.cfg
+    - attribute_name_validator/**
 jobs:
-  call-workflow-passing-data:
-    uses: ./.github/workflows/test.yml
   distribute:
     runs-on: ubuntu-latest
     steps:
