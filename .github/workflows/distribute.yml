@@ -8,6 +8,8 @@ on:
     - setup.py
     - setup.cfg
 jobs:
+  call-workflow-passing-data:
+    uses: ./.github/workflows/test.yml@main
   distribute:
     runs-on: ubuntu-latest
     steps:
