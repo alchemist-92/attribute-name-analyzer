@@ -28,7 +28,7 @@ pip3 install git+https://github.com/siddartham/attribute-name-validator.git
 
 Report of each execution has the catalog of class words, acronyms included. This way, we can see the source data set, based on which reports were produced and lookup approved acronyms.
 
-### Work Flow
+### Workflow
 ![Screenshot](documentation/AttributeNameValidator.png)
 
 ```shell

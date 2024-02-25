@@ -127,7 +127,7 @@ COLUMN_NAMING_GUIDELINES_AND_ANALYSIS_REPORT_USAGE.html       CATALOG.xlsx      
 ```
 
 **HOW TO USE THE REPORT**
-#### Work Flow
+#### Workflow
 ![Screenshot](AttributeNameValidator.png)
 
 On running the command on a column names text file or a folder with column name files,
