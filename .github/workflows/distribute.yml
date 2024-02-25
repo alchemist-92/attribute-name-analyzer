@@ -10,6 +10,8 @@ on:
     - setup.cfg
     - attribute_name_validator/**
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
   distribute:
     runs-on: ubuntu-latest
     steps:
