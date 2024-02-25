@@ -9,7 +9,7 @@ on:
     - setup.cfg
 jobs:
   call-workflow-passing-data:
-    uses: ./.github/workflows/test.yml@main
+    uses: ./.github/workflows/test.yml
   distribute:
     runs-on: ubuntu-latest
     steps:
